@@ -1,0 +1,371 @@
+1.AppWidgetProviderInfo 对象：描述App Widget元数据，比如App Widget layout, update frequency, AppWidgetProvider class，此对象必须在XML中定义
+AppWidgetProvider
+
+第一步：先在Manifest里面申明一个App Widget，如下
+<receiver android:name="ExampleAppWidgetProvider" >
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    </intent-filter>
+    <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/example_appwidget_info" />
+</receiver>
+说明：
+<receiver>元素需要android:name属性，它指定这个App Widget使用的AppWidgetProvider实现类。
+<intent-filter>元素必须包括拥有android:name属性的<action>元素。此属性指定AppWidgetProvider接收ACTION_APPWIDGET_UPDATE广播。这是你唯一必须显示声明的广播。 AppWidgetManager自动发送所有App Widget广播到需要的AppWidgetProvider。
+<meta-data>
+AppWidgetProviderInfo在res/xml文件夹中用<appwidget-provider>元素标记在XML文件中，比如
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="294dp"
+    android:minHeight="72dp"
+    android:updatePeriodMillis="86400000"
+    android:previewImage="@drawable/preview"
+    android:initialLayout="@layout/example_appwidget"
+    android:configure="com.example.android.ExampleAppWidgetConfigure" 
+    android:resizeMode="horizontal|vertical">
+</appwidget-provider>
+2. 每一个Widget就是一个BroadcastReceiver,他们用XML metadata来描述Widget的细节。AppWidget framework 通过Broadcast intents和Widget通信,Widget更新使用RemoteViews来发送。RemoteViews被包装成一个layout和特定内容来显示到桌面上。
+
+intent.setClass(Activity02.this, Activity01.class);/* 在Activity02对象中指定intent要启动的类 */
+startActivity(intent);/* 启动一个新的Activity */
+Activity02.this.finish();/* 关闭当前的Activity */
+
+数据存储5种方式：Shared Preferences, Internal Storage, External Storage, SQLite DB, Network Connection
+
+// Queries the user dictionary and returns results
+mCursor = getContentResolver().query(
+    UserDictionary.Words.CONTENT_URI,   // The content URI of the words table
+    mProjection,                        // The columns to return for each row
+    mSelectionClause                    // Selection criteria
+    mSelectionArgs,                     // Selection criteria
+    mSortOrder);                        // The sort order for the returned rows
+query(Uri,projection,selection,selectionArgs,sortOrder) :
+Uri 	      -> from table_name
+projection    -> col, col, col, ...
+selection     -> Where col = value
+selectionArys -> No exact equivalent
+
+android:layout_width只能设置fill_parent(横向填充整个屏幕)或wrap_content(横向填充控件本身大小)
+android:width设置具体控件的横向大小 单位是像素
+android:layout_gravity: 相对位置参照物(right,left,top,bottom)
+drawable文件夹下面的xml文件为图片选择器文件
+android:scaleType: ImageView控件的缩放比例控制
+
+// 动态增加一个View控件
+mLayout = (LinearLayout) findViewById(R.id.layout); 
+LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(   
+                    LinearLayout.LayoutParams.FILL_PARENT,   
+                    LinearLayout.LayoutParams.WRAP_CONTENT   
+            );   
+mLayout.addView(textView, p);   
+
+head.9.png可以拉伸
+
+match_parent:   -1 The view should be as big as its parent (minus padding). Introduced in API Level 8.  
+wrap_content:   -2  The view should be only big enough to enclose its content (plus padding).  
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+一个Widget所需的基本元素
+1. AddWidgetProviderInfo 对象
+	描述App Widget 的元数据，比如App Widget的layout, update frequency, 和AppWidgetProvider类。定义在xml文件中(在meta-data 属性中指定)
+2. AppWidgetProvider 类实现
+	定义基本的基于广播事件可编程接口(onReceive, onUpdate, onEnable...)
+3. View 布局
+	定义初始化布局
+
+此外, 可以实现一个App Widget 配置Activity, %s
+
+<receiver android:name="ExampleAppWidgetProvider" >
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+    </intent-filter>
+    <meta-data android:name="android.appwidget.provider"
+               android:resource="@xml/example_appwidget_info" />
+</receiver>
+
+<intent-filter> 元素必须包括<action> 元素的android:name属性. 这个属性指定AppWidgetProvider接收ACTION_APPWIDGET_UPDATE广播.这是唯一的一个必须显示声明的广播, AppWidgetManager 必要时会自动发送其他广播给AppWidgetProvider
+<meta-data> 元素指定AppWidgetProviderInfo 资源，它需要以下属性设置
+	* android:name - 指定元数据名. 使用android.appwidget.provider来指定此数据为AppWidgetProviderInfo的描述
+	* android:resource - 指定AppWidgetProviderInfo 资源位置 
+
+========================================================================================================================================================================================================================
+Adding the AppWidgetProviderInfo Metadata
+
+AppWidgetProviderInfo 定义App Widget的基本特性，比如最小layout dimensions, initial layout resource, update frequency, (可选的) 配置Activity. 在此xml文件中AppWidgetProviderInfo对象使用<appwidget-provider> 元素并保存在 res/xml中
+例子:
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="294dp"
+    android:minHeight="72dp"
+    android:updatePeriodMillis="86400000"
+    android:previewImage="@drawable/preview"
+    android:initialLayout="@layout/example_appwidget"
+    android:configure="com.example.android.ExampleAppWidgetConfigure" 
+    android:resizeMode="horizontal|vertical">
+</appwidget-provider>
+
+minWidth 和 minHeight定义了默认最小App Widget尺寸
+updatePeriodMillis 定义了刷新时间
+initialLayout 属性指定layout 资源位置
+configure 输定定义一个可launch 的Activity 当用户加入App Widget时
+previewImage 指定一个预览图片，当用户选择app widget时显示的就是这个预览图片。如果不指定这个属性，将使用应用程序的launcher icon,这对应于AndroidManifest.xml中<receive>元素里的<android:previewImage>属性
+resizeMode 指定resize规则(horizontal, vertical, both) ，长按Widget就可以看出来。
+
+========================================================================================================================================================================================================================
+Creating the App Widget Layout
+布局文件放在res/layout中。由于App Widget布局使用RemoteViews,仅仅支持
+	FrameLayout, LinearLayout, RelativeLayout
+，以及一下widget类
+	AnalogClock
+	Button
+	Chronometer
+	ImageButton
+	ImageView
+	ProgressBar
+	TextView
+	ViewFlipper
+	ListView
+	GridView
+	StackView
+	AdapterViewFlipper
+
+========================================================================================================================================================================================================================
+Using the AppWidgetProvider Class
+
+AppWidgetProvider 类继承BroadcastReceiver, 所以只接受App Widget相关的事件广播，比如App Widget updated, deleted, enabled 和disabled. 
+
+onUpdate(): 每间隔updatePeriodMillis 时间后自动调用一次。当用户第一次加入此App Widget，也会调用此方法，所有此方法应该提供必要的初始化，比如定义Views 的event handlers, 开始一个临时性的Service。如果定义了一个配置 Activity，则用户在增加这个App Widget的时候这个onUpdate方法不会被调用。
+
+onDeleted(Context, int[]): 从App Widget host 中删除此App Widget调用
+
+onEnable(Context): App Widget第一次创建时调用。如果用户增加这个App Widget 的两个实例，则只会第一次调用,  If you need to open a new database or perform other setup that only needs to occur once for all App Widget instances, then this is a good place to do it.
+
+onDisabled(Context): Enable正好相反
+
+onRecevie(Context, Intent): 所有广播都会调用此方法，以上每个操作广播前都会调用此方法, 一般不用实现此方法，因为默认的onRecevie 方法会过滤掉所有非App Widget广播
+
+最重要的AppWidgetProvider 回调函数是onUpdate(), 因为每个App Widget被加入host后都会调用此方法(除非你使用一个配置Activity), 如果App Widget接受任何用户交互事件，一般就是在此方法中注册handlers. 比如， 如果你想做一个launch 一个Activity 的App Widget 按钮, 则
+public class ExampleAppWidgetProvider extends AppWidgetProvider {
+
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        final int N = appWidgetIds.length;
+
+        // Perform this loop procedure for each App Widget that belongs to this provider
+        for (int i=0; i<N; i++) {
+            int appWidgetId = appWidgetIds[i];
+
+            // Create an Intent to launch ExampleActivity
+            Intent intent = new Intent(context, ExampleActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+            // Get the layout for the App Widget and attach an on-click listener
+            // to the button
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.appwidget_provider_layout);
+            views.setOnClickPendingIntent(R.id.button, pendingIntent);
+
+            // Tell the AppWidgetManager to perform an update on the current app widget
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        }
+    }
+}
+
+此AppWidgetProvider 只定义了一个onUpdate() 方法，此方法定义一个PendingIntent来launch一个Activity，此Activity 用setOnClickPendingIntent(int, PendingIntent) 来绑定一个App Widget的按钮。IDs是所有此provider所创建的实例。如果有多个，则更新所有实例。所有实例的更新周期以第一个被创建的App Widget实例为准。
+
+##注意##: 如果App Widget的创建过程会持续几秒钟，则你需要考虑是否开启一个Service在onUpdate中。在这个Service中，你可实施你自己的对此App Widget的更新而不用担心因为 Application Not Responding(ANR) 而使AppWidgetProvider 关闭。
+
+========================================================================================================================================================================================================================
+Creating an App Widget Configuration Activity
+
+配置Activity 应该像正常的Activity 一样在manifest.xml中声明. 但是，它使用ACTION_APPWIDGET_CONFIGURE 动作来launch, 所以一个Activity 可能如以下声明：
+<activity android:name=".ExampleAppWidgetConfigure">
+    <intent-filter>
+        <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+    </intent-filter>
+</activity>
+
+在AppWidgetProviderInfo 中也必须用android:configure 属性来声明此Activity
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    ...
+    android:configure="com.example.android.ExampleAppWidgetConfigure" 
+    ... >
+</appwidget-provider>
+
+注意，此Activity 声明必须用全路径命名空间，因为此Activity 将在包外引用。
+以上就是一个配置Activity 所需的全部，其他跟正常Activity一样。但是有两点你必须记住：
+	* App Widget host 调用配置Activity，则此配置Activity必须返回一个结果。此结果包括一个使用Intent传递，用来launch 一个 Activity 的App Widget ID( 在 Intent extras中的EXTRA_APPWIDGET_ID 保存)
+	* onUpdate() 方法在App Widget创建时不会被调用( 系统不会在一个配置Activity launch的时候发送ACTION_APPWIDGET_UPDATE 广播)。当App Widget第一次创建时,向AppWidgetManager 请求update是一个配置Activity的责任。
+
+Updating the App Widget from the configuration Activity
+1. 从launch 这个Activity 的Intent 中得到 App Widget ID
+	Intent intent = getIntent();
+	Bundle extras = intent.getExtras();
+	if (extras != null) {
+		mAppWidgetId = extras.getInt(
+				AppWidgetManager.EXTRA_APPWIDGET_ID, 
+				AppWidgetManager.INVALID_APPWIDGET_ID);
+	} 
+2. 实施App Widget configuration
+3. 配置完成以后，使用getInstance(Context) 来得到一个AppWidgetManager 实例
+	AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+4. 调用updateAppWidget(int, RemoteViews)， 使用一个RemoteViews layout 来更新一个App Widget
+	RemoteViews views = new RemoteViews(context.getPackageName(),
+	R.layout.example_appwidget);
+	appWidgetManager.updateAppWidget(mAppWidgetId, views);
+5. 最后，创造一个返回Intent，把它设置成一个Activity 结果，然后finish the Activity
+	Intent resultValue = new Intent();
+	resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+	setResult(RESULT_OK, resultValue);
+	finish();
+
+========================================================================================================================================================================================================================
+Using App Widget with Collections
+
+Android 3.0 引入了collections. 此类App Widgets 使用 RemoteViewsService 来显示远程数据(比如来自content provider)支持下的collections, RemoteViewsService 提供的数据在App Widget中使用一个Views呈现, 此View 为collections views
+
+ListView, GridView, StackView, AdapterViewFlipper
+
+正如上面所示，这些collections views 呈现远程数据支持下的collections. 他们使用Adapter 来将用户接口绑定到数据。一个Adapter 使用一系列数据绑定独立的项到独立的View objects. 因为这些collections views由adapters 支持， Android框架必须包括额外的架构来支持他们在app widgets 中的使用。在一个App widgets上下文中，Adapter 被RemoteViewsFactory替换，这是只是一个简单的对Adapter 接口的瘦包装。当请求一个特殊的collections item时，RemoteViewsFactory 以RemoteViews 对象形式创造和返回这个item(getViewAt)。 为了包括一个collections view 在你的app widget 中， 你必须实现RemoteViewsService 和 RemoteViewsFactory.
+
+RemoteViewsService 是一个服务，它允许一个remote adapter 请求RemoteViews对象。RemoteViewsFactory 是一个适配器接口，介于collection view(比如ListView, GridView等)和底层数据之间。
+
+Sample application
+
+Implementing app widgets with collections
+除了声明 service 在Manifest.xml中，为了把collections绑定到你的RemoteViewsService, 你必须声明你的service 权限BIND_REMOTEVIEWS. 这可以防止其他应用对你的App widget数据的自由获取。
+	<service android:name="MyWidgetService"
+	...
+	android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+AppWidgetProvider class for app widgets with collections
+对于一个正规的App widget, 大部分代码集中在AppWidgetProvider 子类中的onUpdate()里。主要的不同点是创造一个app widget collections 时调用setRemoteAdapter(), 此函数告诉collection view 去哪里取数据. 之后RemoteViewsService 返回你的RemoteViewsFactory 实现，为widget提供合适的数据。当调用这个函数(setRemoteAdapter)时，你必须传一个指向你的RemoteViewsService实现的intent和一个App Widget ID(即一个组建ID).
+
+如下是一个StackView Widget 例子：
+	public void onUpdate(Context context, AppWidgetManager appWidgetManager,
+	int[] appWidgetIds) {
+		// update each of the app widgets with the remote adapter
+		for (int i = 0; i < appWidgetIds.length; ++i) {
+			
+			// Set up the intent that starts the StackViewService, which will
+			// provide the views for this collection.
+			Intent intent = new Intent(context, StackWidgetService.class);
+			// Add the app widget ID to the intent extras.
+			intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetIds[i]);
+			intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
+			// Instantiate the RemoteViews object for the App Widget layout.
+			RemoteViews rv = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+			// Set up the RemoteViews object to use a RemoteViews adapter. 
+			// This adapter connects
+			// to a RemoteViewsService  through the specified intent.
+			// This is how you populate the data.
+			rv.setRemoteAdapter(appWidgetIds[i], R.id.stack_view, intent);
+			
+			// The empty view is displayed when the collection has no items. 
+			// It should be in the same layout used to instantiate the RemoteViews
+			// object above.
+			rv.setEmptyView(R.id.stack_view, R.id.empty_view);
+
+			//
+			// Do additional processing specific to this app widget...
+			//
+			
+			appWidgetManager.updateAppWidget(appWidgetIds[i], rv);   
+		}
+		super.onUpdate(context, appWidgetManager, appWidgetIds);
+	}
+
+#注意：数据持久#
+你不能以来服务的单个实例或者实例包含的数据来持久话数据。因此你不应该在RemoteViewsService(除非它是static 的)中存储任何数据。如果你想持久化app widget数据，最好的方法是使用一个ContentProvider，它的数据持久属于进程生命周期
+
+RemoteViewsService class
+如上所述，你的RemoteViewsService 子类提供一个RemoteViewsFactory 来填充remote collection view
+特别的，你需要实施一下步骤：
+1. 子类RemoteViewsService 是一个服务，通过它一个remote adapter可以请求RemoteViews
+2. RemoteViewsService 中的RemoteViewsFactory 是一个接口，处于remote collection view(ListView, GridView...)与这些view下面的数据之间。你任务就是对数据集合中的每一个item创造一个RemoteViews 对象。 此接口是对Adapter的瘦包装 
+RemoteViewsService 主要的工作量就是在RemoteViewsFactory 上
+
+RemoteViewsFactory interface
+你的实现了RemoteViewsFactory 接口的类用来提供带有数据的app widget为每个collection 中的item. 它将你的app widget item XML layout文件与数据绑定。这个数据可以来自任何地方，包括数据库和简单的数组。在StackView Widget sample中，数据是一个WidgetItems 数组。
+在RemoteViewsFactory 中最重要的两个你需要实现的方法是onCreate() 和 getViewAt()
+系统在你的factory 第一次创造的时候调用 onCreate() 方法。 在这个函数中建立数据连接和cursor。例如，StackView Widget sample 中在onCreate() 中初始化WidgetItems 数组对象. 如下
+	class StackRemoteViewsFactory implements
+	RemoteViewsService.RemoteViewsFactory {
+		private static final int mCount = 10;
+		private List<WidgetItem> mWidgetItems = new ArrayList<WidgetItem>();
+		private Context mContext;
+		private int mAppWidgetId;
+
+		public StackRemoteViewsFactory(Context context, Intent intent) {
+			mContext = context;
+			mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+					AppWidgetManager.INVALID_APPWIDGET_ID);
+		}
+
+		public void onCreate() {
+			// In onCreate() you setup any connections / cursors to your data source. Heavy lifting,
+			// for example downloading or creating content etc, should be deferred to onDataSetChanged()
+			// or getViewAt(). Taking more than 20 seconds in this call will result in an ANR.
+			for (int i = 0; i < mCount; i++) {
+				mWidgetItems.add(new WidgetItem(i + "!"));
+			}
+			...
+		}
+	...
+
+RemoteViewsFactory方法 getViewAt() 返回一个RemoteViews 对象，此对象反映数据集合中位置position指定的数据,如下
+	public RemoteViews getViewAt(int position) {
+	   
+		// Construct a remote views item based on the app widget item XML file, 
+		// and set the text based on the position.
+		RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
+		rv.setTextViewText(R.id.widget_item, mWidgetItems.get(position).text);
+
+		...
+		// Return the remote views object.
+		return rv;
+	}
+
+Adding behavior to individual items
+以上节告诉你如何将数据绑定到你的app widget collection。 但是如果想要增加动态行为到你的collection view 的每一个单独item呢？
+正如 Using the AppWidgetProvider Class所说，一般使用setOnClickPendingIntent() 来设置对象的单击行为----比如点击按钮来launch 一个Activity。但是此方法不允许使用在一个单独collection item 的子view上(比如，你可以使用setOnClickPendingIntent来设置一个全局button在Gmail app中来启动一个app，但不是用在单独的一个list item上)。这种情况下，为了增加单击行为到一个单独的item上，我们使用setOnClickFillInIntent()。
+本节用StackView WidgetItem sample来描述怎么对单独的item增加行为。
+	* The StackWidgetProvider (AppWidgetProvider 子类)创造一个带有内建action----TOAST_ACTION----的pending intent
+	* 当用户按下这个view, intent被触发然后广播TOAST_ACTION
+	* 这个广播被StackWidgetProvider 的onRecevie() 拦截，然后显示Toast消息。显示的collection item 数据是由RemoteViewsService 中的RemoteViewsFactory提供。
+
+Setting up the pending intent template
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

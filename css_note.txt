@@ -1,0 +1,127 @@
+--------- beginning of /dev/log/main
+D/dalvikvm(16802): GC_CONCURRENT freed 497K, 6% free 9434K/9991K, paused 6ms+8ms
+D/dalvikvm(16802): GC_CONCURRENT freed 522K, 6% free 9473K/10055K, paused 8ms+8ms
+D/dalvikvm(16802): GC_CONCURRENT freed 534K, 7% free 9450K/10055K, paused 3ms+9ms
+D/dalvikvm(16802): GC_CONCURRENT freed 522K, 7% free 9440K/10055K, paused 2ms+8ms
+D/dalvikvm(16802): GC_CONCURRENT freed 469K, 6% free 9482K/10055K, paused 6ms+4ms
+D/dalvikvm(16802): GC_CONCURRENT freed 474K, 6% free 9519K/10055K, paused 3ms+8ms
+I/EventHub( 1352): Routon Mouse Flag is 0
+V/T9PinyinIME( 1596): T9PinyinIME -- onKeyDown keyCode = 66
+V/T9PinyinIME( 1596): T9PinyinIME -- onKeyDown keyCode = 66 result = false
+V/T9PinyinIME( 1596): T9PinyinIME -- onKeyUp keyCode = 66 result = false
+D/dalvikvm(16802): GC_CONCURRENT freed 512K, 6% free 9546K/10119K, paused 4ms+16ms
+I/EthernetService( 1352): getWifiDisguiseState: 0
+I/EthernetService( 1352): getWifiDisguiseState: 0
+I/PppoeSettings(16745): ETH_INTERFACE is eth0
+I/PppoeSettings(16745): ETH_INTERFACE is eth0
+I/EthernetService( 1352): getWifiDisguiseState: 0
+I/EthernetService( 1352): getWifiDisguiseState: 0
+I/PppoeSettings(16745): ETH_INTERFACE is eth0
+I/PppoeSettings(16745): ETH_INTERFACE is eth0
+I/PppoeSettings(16745): adsl_link is 0
+I/PppoeSettings(16745): not adsl or network not ok eth0
+--------- beginning of /dev/log/system
+D/ConnectivityService( 1352): mActiveDefaultNetwork = 9
+D/ConnectivityService( 1352): mActiveDefaultNetwork = 9
+I/zhenghui( 2606): androidexec=com.routon.brow/com.routon.brow.MainActivityandroidargs=http://10.10.10.2;
+I/GoGoL   ( 2606): 屏蔽掉
+E/TabletStatusBar( 1487): llllllllllllllllllllllllllll
+D/TActivityManager( 1487): startActivity Intent { act=com.routon.brow.FULLSCREEN cat=[android.intent.category.LAUNCHER] dat=http://10.10.10.2  flg=0x10000000 cmp=com.routon.brow/.MainActivity (has extras) } (routon_mouse = on) 
+I/ActivityManager( 1352): START {act=com.routon.brow.FULLSCREEN cat=[android.intent.category.LAUNCHER] dat=http://10.10.10.2  flg=0x10000000 cmp=com.routon.brow/.MainActivity (has extras)} from pid 1487
+D/OpenGLRenderer(16993): Flushing caches (mode 1)
+I/mActionBar(17010): not null
+V/aaa     (17010):   aaaa onload init   0
+I/        (17010): get settingtrue
+D/BaseUi  (17010): onTabDataChanged
+D/title   (17010): 新标签页
+D/XLargeUi(17010): updateNavigationState
+D/NavigationBarTablet(17010): updateNavigationState
+D/NavigationBarTablet(17010): tab!=null
+D/GoBack  (17010): no
+D/ZoomIn  (17010): yes
+D/ZoomOut (17010): yes
+D/webview (17010): onFocusChanged { focused =true}
+D/BaseUi  (17010): onTabDataChanged
+D/title   (17010): 正在载入...
+D/XLargeUi(17010): updateNavigationState
+D/NavigationBarTablet(17010): updateNavigationState
+D/NavigationBarTablet(17010): tab!=null
+D/GoBack  (17010): no
+D/ZoomIn  (17010): yes
+D/ZoomOut (17010): yes
+V/webkit  (17010):  loadStarted url=http://10.10.10.2/, method=0 is true
+V/iptv    (17010): iptv_route_addurl   buf   url https://10.10.10.2/
+V/iptv    (17010): iptv_route_addurl   buf   url https://10.10.10.2/
+V/iptv    (17010): iptv_route_addurl   buf   url https://10.10.10.2/
+D/dalvikvm(16802): GC_CONCURRENT freed 451K, 6% free 9605K/10119K, paused 6ms+16ms
+D/BaseUi  (17010): onTabDataChanged
+D/title   (17010): 正在载入...
+D/XLargeUi(17010): updateNavigationState
+D/NavigationBarTablet(17010): updateNavigationState
+D/NavigationBarTablet(17010): tab!=null
+D/GoBack  (17010): no
+D/ZoomIn  (17010): yes
+D/ZoomOut (17010): yes
+V/webkit  (17010):  loadStarted url=https://10.10.10.2/, method=0 is true
+D/OpenGLRenderer(16993): Flushing caches (mode 0)
+I/NoticeService(16745): run:1391 conecting to server 0status 3
+I/PppoeSettings(16745): netlink status 1
+I/EthernetService( 1352): getWifiDisguiseState: 0
+I/EthernetService( 1352): getWifiDisguiseState: 0
+D/ConnectivityService( 1352): mActiveDefaultNetwork = 9
+V/iptv    (17010): iptv_route_addurl   buf   url https://10.10.10.2/
+I/NoticeService(16745): connectSucess:1493 try to connect http://www.grandes.com.cn/none.html
+I/NoticeService(16745): connectSucess:1498 conecting to server 6http://www.grandes.com.cn/none.html
+I/NoticeService(16745): connectSucess:1504 conecting to server 7
+I/NoticeService(16745): connectSucess:1507 conecting to server 8
+D/onLayout(17010): TabView
+D/BaseUi  (17010): onTabDataChanged
+I/NoticeService(16745): connectSucess:1509 conecting to server 9
+I/NoticeService(16745): connectSucess:1510 2:getResponseCode200
+I/NoticeService(16745): connectSucess:1512 conecting to server 11
+I/NoticeService(16745): getNetStatusOK:1466 conecting to server 4
+D/title   (17010): 正在载入...
+I/NoticeService(16745): getNetStatusOK:1473 conecting to server 5
+I/NoticeService(16745): run:1396 conecting to server 1 true
+I/NoticeService(16745): run:1417 conecting to server 2
+D/XLargeUi(17010): updateNavigationState
+D/NavigationBarTablet(17010): updateNavigationState
+D/NavigationBarTablet(17010): tab!=null
+D/GoBack  (17010): no
+D/ZoomIn  (17010): yes
+D/ZoomOut (17010): yes
+D/BaseUi  (17010): onTabDataChanged
+D/title   (17010): 正在载入...
+D/XLargeUi(17010): updateNavigationState
+D/NavigationBarTablet(17010): updateNavigationState
+D/NavigationBarTablet(17010): tab!=null
+D/GoBack  (17010): no
+D/ZoomIn  (17010): yes
+D/ZoomOut (17010): yes
+D/Controller(17010): onCreateOptionsMenu
+D/Controller(17010): onPrepareOptionMenu
+D/MainActivity(17010): onDestroy
+I/Process (17010): Sending signal. PID: 17010 SIG: 9
+W/ActivityManager( 1352): Launch timeout has expired, giving up wake lock!
+W/InputDispatcher( 1352): channel '4164cee8 com.routon.brow/com.routon.brow.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher( 1352): channel '4164cee8 com.routon.brow/com.routon.brow.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+W/InputDispatcher( 1352): Attempted to unregister already unregistered input channel '4164cee8 com.routon.brow/com.routon.brow.MainActivity (server)'
+I/WindowManager( 1352): WINDOW DIED Window{4164cee8 com.routon.brow/com.routon.brow.MainActivity paused=false}
+I/ActivityManager( 1352): Process com.routon.brow (pid 17010) has died.
+W/InputDispatcher( 1352): channel '417b5b10 com.routon.brow/com.routon.brow.MainActivity (server)' ~ Consumer closed input channel or an error occurred.  events=0x8
+E/InputDispatcher( 1352): channel '417b5b10 com.routon.brow/com.routon.brow.MainActivity (server)' ~ Channel is unrecoverably broken and will be disposed!
+W/InputDispatcher( 1352): Attempted to unregister already unregistered input channel '417b5b10 com.routon.brow/com.routon.brow.MainActivity (server)'
+I/WindowManager( 1352): WINDOW DIED Window{417b5b10 com.routon.brow/com.routon.brow.MainActivity paused=false}
+I/ActivityManager( 1352): haveBgApp:true app.setAdj:0
+W/WindowManager( 1352): Failed looking up window
+W/WindowManager( 1352): java.lang.IllegalArgumentException: Requested window android.os.BinderProxy@416a63d8 does not exist
+W/WindowManager( 1352): 	at com.android.server.wm.WindowManagerService.windowForClientLocked(WindowManagerService.java:7182)
+W/WindowManager( 1352): 	at com.android.server.wm.WindowManagerService.windowForClientLocked(WindowManagerService.java:7173)
+W/WindowManager( 1352): 	at com.android.server.wm.WindowState$DeathRecipient.binderDied(WindowState.java:1537)
+W/WindowManager( 1352): 	at android.os.BinderProxy.sendDeathNotice(Binder.java:417)
+W/WindowManager( 1352): 	at dalvik.system.NativeStart.run(Native Method)
+I/WindowManager( 1352): WIN DEATH: null
+W/ActivityManager( 1352): Force removing ActivityRecord{418b1420 com.routon.brow/.MainActivity}: app died, no saved state
+W/InputManagerService( 1352): Window already focused, ignoring focus gain of: com.android.internal.view.IInputMethodClient$Stub$Proxy@419f0758
+D/dalvikvm(16802): GC_CONCURRENT freed 509K, 6% free 9612K/10183K, paused 3ms+11ms
+D/dalvikvm(16802): GC_CONCURRENT freed 500K, 6% free 9623K/10183K, paused 4ms+9ms

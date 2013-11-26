@@ -1,0 +1,34 @@
+models是数据库与Python之间的中间过度物
+settings里的INSTALLED_APPS对应数据库中的各个表，用manage.py syncdb自动生成
+urls.py映射了HTTP请求路径与Djando处理路径
+
+1. urls匹配的路径服从先到先匹配原则，即可以匹配多个路径的规则，匹配第一个符合规则的路径1. urls匹配的路径服从先到先匹配原则，即可以匹配多个路径的规则，匹配第一个符合规则的路径
+
+
+
+2. 报错：
+	CSRF verification failed. Request aborted.
+处理：
+	在view中增加from django.views.decorators.csrf import csrf_exempt，并在处理POST请求的函数上面增加@csrf_exempt
+
+3. django 中问报错 ： 
+在使用中文的文件第一行+ #-*-coding: utf-8-*-
+
+4. django 'str' object has no attribute 'status_code'
+可能是views中返回的对象没有用HttpResponse包装
+
+5. Mezzanine会先运行location.py 在运行django的settings.py
+
+6. 出现 DoesNotExist at /admin/ 错误，移除settings.py 中的INSTALLED_APPS 'django.contrib.sites'
+
+7. settings.py 中DEBUG=False后，处理：http://blog.csdn.net/weiyuanke/article/details/8212104
+
+8. 在mezzanine工程中如果在INSTALLED_APP下去掉**accounts那行，就会enable 注册和登录功能
+
+9. 使用Jquery的Ajax功能的时候出现500,403问题可能是没有加@csrf_exempt
+
+10. 修改models某个域的css布局，可以在其相应的form文件中的forms相应域使用widget=forms.*(attrs={'class':'something'})来修改
+
+11. 在UserProfile中的save_models中不可以来取其User的id，因为此时Userid还没有生成
+
+12. 在list_display中的域如果没有找到，可以在其Admin类中定义相应的函数(比如get_foo)来返回值，如果想返回html原生值，则需要设置get_foo.allow_tags = True

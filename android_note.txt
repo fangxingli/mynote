@@ -1,0 +1,4 @@
+1.widget
+	在widget配置文件中增加
+	android:configure="com.example.android.ExampleAppWidgetConfigure"
+	就会在每次添加widget到桌面时调用此activity

@@ -1,0 +1,23 @@
+1. android POST
+new Thread(){
+					public void run() {
+						HttpClient hc = new DefaultHttpClient();
+						HttpPost method = new HttpPost("http://0.ssdylfx.duapp.com/add_data?");
+						List<NameValuePair> params=new ArrayList<NameValuePair>();
+						params.add(new BasicNameValuePair("user", user_text.getText().toString()));
+						params.add(new BasicNameValuePair("passwd", passwd_text.getText().toString()));
+						
+						try {
+							method.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+							Log.i("GoGo", method.toString());
+							HttpResponse response = hc.execute(method);
+							Log.i("GoGo", EntityUtils.toString(response.getEntity()));
+						} catch (Exception e){
+							e.printStackTrace();
+						}
+					}
+				}.start();
+
+2. 使用HttpURlConnection问题
+使用HttpURlConnection下载文件时，有时候得不到Content-Length，虽然文件大小不大，因为比此大的文件都可以得到Content-Length。后
+改用Apache HttpClient库解决，原因未知。

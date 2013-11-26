@@ -1,0 +1,1 @@
+encode('windows-1252').decode('gb2312')

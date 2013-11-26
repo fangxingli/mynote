@@ -1,0 +1,17 @@
+git clone git@172.16.55.23:repo/systemui.git
+git clone git@172.16.55.23:repo/T.launcher.git
+
+git clone git@172.16.55.214:quyou.git
+(10:05:36 HKT) 吴凯: xuleizhichen
+(10:05:40 HKT) 吴凯: wvs97rvd
+(10:05:50 HKT) 吴凯: https://svn.duapp.com/appid8j23edie5d/
+
+使用github
+1.建立新仓库
+2.记得在setting中添加公钥
+
+git clone https://[用户名@]git.duapp.com/appid5ft4z6td03
+
+----------------------------------------------------------------------------------------------------------
+git reset --soft [ 每个commit的值 ] 只回滚log和status，不改变代码
+git reset --soft [ 每个commit的值 ] 不但回滚log和status，而且改变代码，之后可以查看git status看与最新版本差多少个commit来回到最新版本

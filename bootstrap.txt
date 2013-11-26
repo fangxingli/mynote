@@ -1,0 +1,5 @@
+1. 使用navbar-fixed-* 会将导航条固定在顶(底)部，使用navbar-static-*不会固定
+2. .pull-right 右侧对齐
+3. 通过使用<ul class="list-inline">使得所有li同一行
+4. col-md-* 和 row 不要使用在一个class元素里面，同理row 和container一样
+5. 在head部分link进来的CSS文件，后面的会覆盖前面的定义

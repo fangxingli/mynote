@@ -1,0 +1,27 @@
+1. 对于从别处取得的字符串使用str.strip('\0')清空空字符
+2. 重载了__getattr__或者__setattr__就要继承object，否则可能在使用其他函数时出错，
+3. 对于序列化对象，即pickle.dumps()时，会调用对象的__getstate__()方法，如果没有定义，则会调用对象的__dict__方法
+3a.对于pickle 和 __getattr__重载可能出现的问题，使用首先检测是否为__XXX__方法，如果是则调用父类对象的__getattr__解决
+4. 获得当前文件的路径使用 os.path.dirname(os.path.realpath(__file__)), os.getcwd()在此文件是被import 时候失效
+5. 匹配中文 [^x00-xff]{3}
+6. chr(ASCII)->字符, ord(字符)->ASCII
+7. 字符串前面加r''为关闭转义字符
+8. urllib.quote_plus() : '<>' -------> '%3C%3E', \
+   urllib.unquote_plus()相反
+9. 异常捕捉：
+	try:
+		pass
+	except Excpetion, e
+		print e
+
+insert into nanhang_userprofile(user_id, name, user_type, english_level, male_or_female, birthday, work_time, borading_id, passport_id, tetongzheng_id, drill_book_id, health_cert_id, is_purser, is_first_class_trained, is_international_journey, is_checker, is_flying_instructor, good_at, post_number, group, office_name) SELECT auth_user.id, user.`用户姓名`, user.`用户类型`, user.`英语等级`, user.`性别`, user.`生日`, user.`工作时间`, user.`空勤登机证号`, user.`护照号码`, user.`特通证号码`, user.`训练手册号码`, user.`健康证号码`, user.`乘务长资格`, user.`头等舱培训`, user.`国际中短程`, user.`检查员资格`, user.`带飞教员`, user.`特长`, user.PostNum, user.UserGroup, user.ksname FROM auth_user LEFT JOIN user ON auth_user.username = user.`用户名`
+
+SELECT tmp . * , blog_blogcategory.id
+FROM (
+
+SELECT message.`标题` , message.`栏目ID` , menu.`栏目名称` 
+FROM message
+LEFT JOIN menu ON message.`栏目ID` = menu.`ID`
+) AS tmp
+LEFT JOIN blog_blogcategory ON tmp.`栏目名称` = blog_blogcategory.title
+ORDER BY blog_blogcategory.id
